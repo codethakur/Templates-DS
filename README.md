@@ -1,5 +1,5 @@
 # Templates-DS
-- /*C++11/17/20*/ ⚠
+- **C++11/17/20** ⚠
 - Stack
 - Queue
 - Deque
