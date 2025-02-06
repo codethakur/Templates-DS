@@ -93,3 +93,22 @@ void zigZagTraversal(std::shared_ptr<BinaryTreeNode> root)
     }
 #endif
 
+/*Amazon
+28
+Facebook
+18
+Microsoft
+13
+Bloomberg
+5
+Google
+3
+Apple
+2
+LinkedIn
+2
+Oracle
+2
+Adobe
+2*/
+
