@@ -3,4 +3,4 @@
 - Stack
 - Queue
 - Deque
--Trees
+- Trees
