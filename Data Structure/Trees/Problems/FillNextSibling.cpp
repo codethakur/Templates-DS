@@ -100,6 +100,18 @@ public:
     }
 };
 
+#if 0
+  auto root = std::make_shared<BinaryTreeSibling>(1);
+    root->setLeft(std::make_shared<BinaryTreeSibling>(2));
+    root->setRight(std::make_shared<BinaryTreeSibling>(3));
+    root->getLeft()->setLeft(std::make_shared<BinaryTreeSibling>(4));
+    root->getLeft()->setRight(std::make_shared<BinaryTreeSibling>(5));
+    root->getRight()->setLeft(std::make_shared<BinaryTreeSibling>(6));
+    root->getRight()->setRight(std::make_shared<BinaryTreeSibling>(7));
+    FillNextSibling sibling;
+    sibling.withoutRecursion(root);
 
+    sibling.printNextSiblings(root);
+#endif
 
 
