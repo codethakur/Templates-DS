@@ -37,3 +37,59 @@ void zigZagTraversal(std::shared_ptr<BinaryTreeNode> root)
         }
     }
 }
+
+#if 0
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        if (!root) return result;
+
+        stack<TreeNode*> currentLevelStack;
+        stack<TreeNode*> nextLevelStack;
+        
+        currentLevelStack.push(root);
+        bool leftToRight = true;
+
+        while (!currentLevelStack.empty()) {
+            vector<int> levelValues;
+            while (!currentLevelStack.empty()) {
+                TreeNode* node = currentLevelStack.top();
+                currentLevelStack.pop();
+                
+                if (node) {
+                    levelValues.push_back(node->val);
+                    
+                    // Push children to the next level stack in the correct order
+                    if (leftToRight) {
+                        if (node->left) nextLevelStack.push(node->left);
+                        if (node->right) nextLevelStack.push(node->right);
+                    } else {
+                        if (node->right) nextLevelStack.push(node->right);
+                        if (node->left) nextLevelStack.push(node->left);
+                    }
+                }
+            }
+            
+            // Add the current level's values to the result
+            result.push_back(levelValues);
+            
+            // Toggle the direction for the next level and swap stacks
+            leftToRight = !leftToRight;
+            swap(currentLevelStack, nextLevelStack);
+        }
+
+        return result;
+    }
+#endif
+
