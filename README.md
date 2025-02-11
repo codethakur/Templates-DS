@@ -4,3 +4,6 @@
 - Queue
 - Deque
 - Trees
+  |--Binary Tree
+  |--Generic Tree(k-ary tree)
+  |--Threaded Binary Tree
