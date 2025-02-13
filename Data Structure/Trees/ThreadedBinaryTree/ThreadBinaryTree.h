@@ -54,7 +54,7 @@ public:
         if (clone)
         {
             std::cerr << "\nDuplicated data" << std::endl;
-            return root; // Fix: Return without modifying the tree
+            return root; 
         }
 
         ThreadedNode *newNode = new ThreadedNode(data);
@@ -238,7 +238,7 @@ public:
         return root;
     }
 
-    struct ThreadedNode *del(struct ThreadedNode *root, int data)
+    struct ThreadedNode *deleteNode(struct ThreadedNode *root, int data)
     {
         struct ThreadedNode *par, *ptr;
         int found = 0;
