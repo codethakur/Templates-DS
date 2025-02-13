@@ -14,7 +14,7 @@ int main()
     std::cout << "\nPreOrder:" << std::endl;
     Tree.preorder(root);
     std::cout << "\n-----------------------\n";
-    Tree.del(root, 5);
+    Tree.deleteNode(root, 5);
     Tree.preorder(root);
 
     return 0;
