@@ -26,7 +26,7 @@ namespace SinglyLinkedList
             temp->next = nullptr; // New node's next should point to nullptr
 
             if (head == nullptr) {
-                head = std::move(temp);  
+                head = std::move(temp);
             }
             else {
                 temp->next = head;  // New node points to the old head
@@ -63,7 +63,7 @@ namespace SinglyLinkedList
             return head; // Return the head (unchanged)
         }
 
-        std::shared_ptr<ListNode> insertAtMiddle(std::shared_ptr<ListNode>&head, int data)
+        std::shared_ptr<ListNode> insertAtMiddle(std::shared_ptr<ListNode>& head, int data)
         {
             if (!head) {
                 throw std::runtime_error("List is empty!");
@@ -96,7 +96,7 @@ namespace SinglyLinkedList
             return head; // Return the updated list
         }
 
-        std::shared_ptr<ListNode> insertAtGivenPosition(std::shared_ptr<ListNode>&head, int data, int position)
+        std::shared_ptr<ListNode> insertAtGivenPosition(std::shared_ptr<ListNode>& head, int data, int position)
         {
             if (head == nullptr) {
                 throw  std::runtime_error("List is empty!");
@@ -108,13 +108,13 @@ namespace SinglyLinkedList
                 auto temp = std::make_shared<ListNode>();
                 temp->data = data;
                 temp->next = nullptr; // New node's next should point to nullptr
-                
+
                 if (position <= 1) {
                     head->next = temp;
                     return head;
                 }
                 auto curr = head;
-                while (--position && curr!= nullptr)
+                while (--position && curr != nullptr)
                 {
                     curr = curr->next;
                 }
@@ -130,7 +130,7 @@ namespace SinglyLinkedList
 
         }
 
-        void deleteFirstNode(std::shared_ptr<ListNode>&head)
+        void deleteFirstNode(std::shared_ptr<ListNode>& head)
         {
             if (head == nullptr) {
                 throw std::runtime_error("List is not found");
@@ -139,7 +139,7 @@ namespace SinglyLinkedList
             head = head->next;
         }
 
-        void deleteLastNode(std::shared_ptr<ListNode>& head) 
+        void deleteLastNode(std::shared_ptr<ListNode>& head)
         {
             if (!head) {
                 throw std::runtime_error("List is not found");
@@ -153,11 +153,11 @@ namespace SinglyLinkedList
 
             // Use a pointer to traverse, but don't modify `head` itself
             auto current = head;
-            while (current->next->next) { 
+            while (current->next->next) {
                 current = current->next;
             }
 
-            current->next = nullptr; 
+            current->next = nullptr;
         }
         void deleteIntermediate(std::shared_ptr<ListNode>& head)
         {
@@ -193,3 +193,61 @@ namespace SinglyLinkedList
 }
 
 #endif // SINGLELYNKEDLIST_H
+
+
+
+
+
+
+#if 0
+#include "SinglyLinkedList.h"
+#include<iostream>
+
+int main() {
+    using namespace SinglyLinkedList;
+
+    LinkedList List;
+    std::shared_ptr<ListNode> head = nullptr;
+
+    // Insert elements
+    head = List.insertAtEnd(head, 1);
+    head = List.insertAtEnd(head, 2);
+    head = List.insertAtEnd(head, 3);
+    head = List.insertAtEnd(head, 4);
+
+    std::clog << "Linked List: ";
+    List.DisplayLinkedList(head);
+
+    // Insert at the front
+    head = List.insertAtFront(head, 0);
+    std::clog << "After inserting at front: ";
+    List.DisplayLinkedList(head);
+
+    // Insert in the middle
+    head = List.insertAtMiddle(head, 9);
+    std::clog << "After inserting in the middle: ";
+    List.DisplayLinkedList(head);
+
+    // Insert at a specific position
+    try {
+        head = List.insertAtGivenPosition(head, 99, 3);
+        std::clog << "After inserting at position 3: ";
+        List.DisplayLinkedList(head);
+    }
+    catch (const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    // Delete first node
+    List.deleteFirstNode(head);
+    std::clog << "After deleting first node: ";
+    List.DisplayLinkedList(head);
+
+    // Delete last node
+    List.deleteLastNode(head);
+    std::clog << "After deleting last node: ";
+    List.DisplayLinkedList(head);
+
+    return 0;
+}
+#endif
