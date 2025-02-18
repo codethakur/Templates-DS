@@ -92,3 +92,38 @@ void Stack<T>::deleteStack() {
 }
 
 #endif
+
+
+
+#if 0
+
+
+
+#include "stackArray.h"
+
+int main() {
+    Stack<int> intStack(5);  // Stack of integers
+    Stack<double> doubleStack(5);  // Stack of doubles
+    Stack<std::string> stringStack(3);  // Stack of strings
+
+    // Testing intStack
+    intStack.Push(10);
+    intStack.Push(20);
+    intStack.Push(30);
+    std::cout << "Top element (intStack): " << intStack.Peek() << "\n";
+    std::cout << "Popped: " << intStack.Pop() << "\n";
+    std::cout << "Stack size: " << intStack.Size() << "\n";
+
+    // Testing doubleStack
+    doubleStack.Push(1.1);
+    doubleStack.Push(2.2);
+    std::cout << "Top element (doubleStack): " << doubleStack.Peek() << "\n";
+
+    // Testing stringStack
+    stringStack.Push("Hello");
+    stringStack.Push("World");
+    std::cout << "Top element (stringStack): " << stringStack.Peek() << "\n";
+
+    return 0;
+}
+#endif // 0
