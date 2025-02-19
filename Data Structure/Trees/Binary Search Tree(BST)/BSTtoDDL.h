@@ -147,12 +147,73 @@ namespace BSTtoDLL
 
 
 
-
-
-
-
 	};
 	
 }
 
 #endif // !BSTTODDL_H
+
+
+#if 0
+#include<iostream>
+#include "BSTtoDDL.h"
+#include"DoublyLinkedList.h"
+#include"BinarySearchTree.h"
+#include"stackArray.h"
+
+using namespace BSTtoDLL;
+int main()
+{
+	/*		10
+		   /   \
+		  5     20
+		 / \   /  \
+		3   7 15   25
+	*/
+
+	BinarySearchTree bst;
+	std::unique_ptr<BinarySearchTreeNode> root = nullptr;
+
+	root = bst.insert(std::move(root), 10);
+	root = bst.insert(std::move(root), 5);
+	root = bst.insert(std::move(root), 20);
+	root = bst.insert(std::move(root), 3);
+	root = bst.insert(std::move(root), 7);
+	root = bst.insert(std::move(root), 15);
+	root = bst.insert(std::move(root), 25);
+
+	std::cout << "BinarySearchTree (DLR): ";
+	bst.preOrderTraversal(root);
+	std::cout << std::endl;
+
+	BSTtoDLL::BSTtoDoublyLinkedList bstToll;
+	auto head = bstToll.withoutRecursion(root);
+
+
+	std::cout << "After convert Tree to LinkedList: ";
+	DoublyLinkedList::LinkedList List;
+	List.DisplayLinkedList(head);
+
+	BSTtoDLL::BSTtoDoublyLinkedList Tree;
+	Tree.DLLtoBST(head);
+	std::cout << "BinarySearchTree from LinkedList: ";
+	auto curr = head;
+	while (curr)
+	{
+		std::cout << curr->data<<" ";
+		curr = curr->;
+	}
+	
+
+
+
+
+	system("pause>0");
+	return 0;
+}
+
+
+
+
+
+#endif
