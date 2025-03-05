@@ -62,7 +62,7 @@ std::shared_ptr<AVLTreeNode> singleRotateRight(std::shared_ptr<AVLTreeNode> root
 
 // **Left-Right (LR) Rotation**
 std::shared_ptr<AVLTreeNode> doubleRotateLeft(std::shared_ptr<AVLTreeNode> root) {
-    root->left = singleRotateLeft(root->left);
+    root->left = singleRotateLeft(root->left);  
     return singleRotateRight(root);
 }
 
