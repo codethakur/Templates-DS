@@ -13,3 +13,8 @@ public:
             if (id[i] == oldID) id[i] = newID;
     }
 };
+/*
+    Time Complexity:
+    Find(x): O(1)
+    Union(x, y): O(n)
+*/
