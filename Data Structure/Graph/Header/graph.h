@@ -168,6 +168,40 @@ namespace AdjacencyMatrix {
             }
         }
     }
+     void BFS(Graph* graph, DynamicQueueModule::Queue<int>* q, std::vector<bool>& visited) {
+         using namespace DynamicQueueModule;
+    
+         if (isEmpty(q))
+             return; // Base case: Stop when queue is empty
+    
+         int vertex = frontElement(q);
+         deQueue(q);
+         std::cout << vertex << " ";
+    
+         for (int i = 0; i < graph->V; i++) {
+             if (graph->adjMatrix[vertex][i] == 1 && !visited[i]) {
+                 enQueue(q, i);
+                 visited[i] = true;
+             }
+         }
+    
+         // Recursive call
+         BFS(graph, q, visited);
+     }
+     void BFS_Recursion(Graph* graph, int startVertex) {
+         using namespace DynamicQueueModule;
+    
+         std::vector<bool> visited(graph->V, false);
+         DynamicQueueModule::Queue<int>* q = DynamicQueueModule::createQueue<int>(graph->V);
+         // Create a custom queue
+    
+         enQueue(q, startVertex);
+         visited[startVertex] = true;
+    
+         BFS(graph, q, visited);
+    
+         destroyQueue(q);  // Clean up memory after BFS is complete
+     }
 }
 
 
