@@ -205,8 +205,23 @@ namespace AdjacencyMatrix {
 }
 
 
+
+
 namespace AdjancencyList
 {
+    Graph* createGraph(const int numVertices) {
+        assert(numVertices > 0); // Ensure valid number of vertices
+
+        Graph* graph = new Graph();
+        graph->V = numVertices;
+        graph->e = 0;
+
+        // Initialize adjacency list with nullptrs
+        graph->adjList.resize(numVertices, nullptr);
+
+        return graph;
+    }
+
     int insertEdges(Graph* graph, const Edge* E) {
         int n = graph->V;
         int from = E->source;
@@ -295,4 +310,181 @@ namespace AdjancencyList
         return 1;
     }
 
+    void printGraph(Graph* graph) {
+        for (int i = 0; i < graph->V; i++) {
+            std::cout << i << " -> ";
+            ListNode* temp = graph->adjList[i]; 
+            while (temp) {
+                std::cout << temp->vertex << " -> ";
+                temp = temp->next;
+            }
+            std::cout << "NULL\n";  // End of adjacency list for this vertex
+        }
+    }
+    void deleteGraph(Graph* graph) {
+        if (!graph) return;  // Handle null pointer
+
+        // Iterate over each adjacency list and delete all nodes
+        for (int i = 0; i < graph->V; i++) {
+            ListNode* temp = graph->adjList[i];
+            while (temp) {
+                ListNode* next = temp->next;  // Store next node
+                delete temp;  // Free current node
+                temp = next;  // Move to next node
+            }
+        }
+
+        // No need to delete std::vector because it handles memory itself
+        delete graph;  // Free the graph structure itself
+    }
+
+
+    void BFS_iteration(Graph* graph, int startVertex)
+    {
+        using namespace DynamicQueueModule;
+        std::vector<int>visited(graph->V, false);
+        Queue<int>* q = createQueue<int>(10);
+
+        enQueue(q, startVertex);
+        visited[startVertex] = true;
+
+        while (!isEmpty(q))
+        {
+            int vertex = deQueue(q);
+            std::cout << vertex << " ";
+
+            ListNode* temp = graph->adjList[vertex];
+            while (temp)
+            {
+                if (!visited[temp->vertex]) {
+                    enQueue(q, temp->vertex);
+                    visited[temp->vertex] = true;
+                }
+                temp = temp->next;
+            }
+        }
+    }
+    using namespace DynamicQueueModule;
+    void BFS(Graph* graph, DynamicQueueModule::Queue<int>* q, std::vector<bool>& visited)
+    {
+
+        if (isEmpty(q)) return;
+
+        int vertex = deQueue(q);
+        std::cout << vertex << " ";
+
+        ListNode* temp = graph->adjList[vertex];
+        while (temp)
+        {
+            if (!visited[temp->vertex]) {
+                enQueue(q, temp->vertex);
+                visited[temp->vertex] = true;
+            }
+            temp = temp->next;
+        }
+        BFS(graph, q, visited);
+    }
+    void BFS_ReCursion(Graph* graph, int startVertex)
+    {
+        //using namespace DynamicQueueModule;
+
+        std::vector<bool>visited(graph->V, false);
+        DynamicQueueModule::Queue<int>* q = 
+            DynamicQueueModule::createQueue<int>(graph->V);
+
+        visited[startVertex] = true;
+        enQueue(q, startVertex);
+
+        BFS(graph, q, visited);
+    }
+
+}
+using namespace DynamicQueueModule;
+std::vector<int>topologySort_BFS(Graph* graph)
+{
+    std::vector<int>inDegree(graph->V, 0);
+    Queue<int>* q = createQueue<int>(graph->V);
+    std::vector<int>topologySort;
+
+    // Compute in-degree of each vertex
+    for (int i = 0; i < graph->V; i++) {
+        ListNode* temp = graph->adjList[i];
+        while (temp) {
+            inDegree[temp->vertex]++;
+            temp = temp->next;
+        }
+    }
+    /* //Corrected In-Degree Calculation for Adjacency Matrix
+        for (int i = 0; i < graph->v; i++) {  // i is the destination vertex
+        for (int j = 0; j < graph->v; j++) {  // j is the source vertex
+            if (graph->adjMatrix[j][i] == 1) { // Only count incoming edges
+                inDegree[i]++;
+            }
+        }
+    }*/
+    
+    // Push all vertices with in-degree 0 into queue
+    for (int i = 0; i < graph->V; i++) {
+        if (inDegree[i] == 0) {
+            enQueue(q, i);
+        }
+    }
+
+    // Process vertices
+    while (!isEmpty(q))
+    {
+        int vertex = deQueue(q);
+
+        topologySort.push_back(vertex);
+        // Reduce in-degree of adjacent nodes
+        ListNode* temp = graph->adjList[vertex];
+        while (temp)
+        {
+            inDegree[temp->vertex]--;
+            if (inDegree[temp->vertex] == 0) {
+                enQueue(q, temp->vertex);
+            }
+            temp = temp->next;
+        }
+
+    }
+    // If topological sort is not possible (cycle exists)
+    if (topologySort.size() != graph->V) {
+        throw std::runtime_error("Graph has a cycle, topological sort not possible!");
+    }
+
+    return topologySort;
+
+}
+void topo_DFS_Help(Graph* graph, int vertex, std::vector<bool>& visited, std::stack<int>& st) {
+    visited[vertex] = true;
+    ListNode* temp = graph->adjList[vertex];
+
+    while (temp) {
+        if (!visited[temp->vertex]) {
+            topo_DFS_Help(graph, temp->vertex, visited, st);
+        }
+        temp = temp->next;
+    }
+    st.push(vertex);  // Push vertex after visiting all adjacent nodes
+}
+
+std::vector<int> topologySort_DFS(Graph* graph) {
+    std::vector<bool> visited(graph->V, false);
+    std::stack<int> st;
+    std::vector<int> topoSort;
+
+    for (int i = 0; i < graph->V; i++) {
+        if (!visited[i]) { // Call DFS only if not visited
+            topo_DFS_Help(graph, i, visited, st);
+        }
+    }
+
+    while (!st.empty()) {
+        int vertex = st.top();
+        st.pop();
+        topoSort.push_back(vertex);
+    }
+
+    return topoSort;
 }
