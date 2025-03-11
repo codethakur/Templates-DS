@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cassert>
 #include<vector>
+#include"stackArray.h"
 struct ListNode {
     int vertex;
     ListNode* next;
@@ -128,6 +129,44 @@ namespace AdjacencyMatrix {
         }
         delete[] graph->adjMatrix;
         delete graph;
+    }
+    void DFS_itreative(Graph* graph, int startVertex)
+    {
+        std::vector<bool> visited(graph->V, false);
+        //std::stack<int> st;
+        using namespace StackArray;
+        Stack<int>st(10);
+    
+        st.Push(startVertex);
+        visited[startVertex] = true;
+    
+        while (!st.isEmpty())
+        {
+            int vertix = st.Pop();
+    
+            std::cout << vertix << " ";
+            for (int i = graph->V; i >= 0; i--)
+            {
+                if (graph->adjMatrix[vertix][i] == 1 && !visited[i])
+                {
+                    st.Push(i);
+                    visited[i] = true;
+                }
+            }
+        }
+    }
+    void DFS_Recursion(Graph *graph, int startVertex, std::vector<bool> &visited)
+    {
+        visited[startVertex] = true;
+        std::cout << startVertex << " ";
+
+        for (int i = 0; i < graph->v; i++)
+        {
+            if (graph->adjacencyMatrix[startVertex][i] == 1 && !visited[i])
+            {
+                DFS_Recursion(graph, i, visited);
+            }
+        }
     }
 }
 
