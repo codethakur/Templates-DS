@@ -1,6 +1,6 @@
 # Templates-DS
 
-A collection of C++11/14/17/20 Data Structures and Algorithms.
+⚠ This project uses C++11/14/17/20.
 
 ## Data Structures
 
