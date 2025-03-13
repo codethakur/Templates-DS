@@ -46,11 +46,13 @@ void Dijkstra(WeightedGraph* graph, int startVertex)
 	{
 		std::cout << i << "\t" << (distance[i] == INF ? -1 : distance[i]) << "\n";
 	}
+	#if 0
 	std::cout << "\nShortest Path Tree (Parent Array):\n";
 	for (int i = 0; i < graph->V; i++)
 	{
 		std::cout << "Parent of " << i << ": " << parent[i] << "\n";
 	}
+	#endif
 }
 
 
