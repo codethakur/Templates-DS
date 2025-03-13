@@ -1,13 +1,26 @@
 # Templates-DS
-- **C++11/14/17/20** ⚠
-- Stack
-- Queue
-- Deque
-- Trees
-  |--Binary Tree
-  |--Generic Tree(k-ary tree)
-  |--Threaded Binary Tree
-- Graph
-  |- BFS (Breadth-First Search), DFS (Depth-First Search)
-  |- Dijkstra’s Algorithm, Bellman-Ford Algorith  
-  |- Topological Sorting
+
+A collection of C++11/14/17/20 Data Structures and Algorithms.
+
+## Data Structures
+
+### Linear Data Structures
+- **Stack**
+- **Queue**
+- **Deque** (Double-ended Queue)
+
+### Non-Linear Data Structures
+- **Trees**
+  - Binary Tree
+  - Generic Tree (K-ary Tree)
+  - Threaded Binary Tree
+
+- **Graphs**
+  - **Graph Traversal**
+    - BFS (Breadth-First Search)
+    - DFS (Depth-First Search)
+  - **Shortest Path Algorithms**
+    - Dijkstra’s Algorithm
+    - Bellman-Ford Algorithm
+  - **Other Graph Algorithms**
+    - Topological Sorting
