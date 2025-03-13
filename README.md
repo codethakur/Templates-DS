@@ -7,3 +7,7 @@
   |--Binary Tree
   |--Generic Tree(k-ary tree)
   |--Threaded Binary Tree
+- Graph
+  |- BFS (Breadth-First Search), DFS (Depth-First Search)
+  |- Dijkstra’s Algorithm, Bellman-Ford Algorith  
+  |- Topological Sorting
