@@ -24,7 +24,7 @@
     - Bellman-Ford Algorithm
   - **Other Graph Algorithms**
     - Topological Sorting
- - **Minimum Spanning Tree (MST)**
+  - **Minimum Spanning Tree (MST)**
     -  Kruskal’s Algorithm
     -  Prim’s Algorithm
 
