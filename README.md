@@ -4,6 +4,9 @@
 
 ## Data Structures
 
+### Static Array 
+- **Array**
+
 ### Linear Data Structures
 - **Stack**
 - **Queue**
