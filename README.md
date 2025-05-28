@@ -8,6 +8,7 @@
 - **Array**
 
 ### Linear Data Structures
+- **Vector**
 - **Stack**
 - **Queue**
 - **Deque** (Double-ended Queue)
