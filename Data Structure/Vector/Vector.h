@@ -50,6 +50,12 @@ public:
 
     size_t Size() const { return m_Size; }
 
+    void ShrinkToFit() {
+        if (m_Size < m_Capacity)
+            ReAlloc(m_Size);
+    }
+
+
 private:
     void ReAlloc(size_t newCapacity) {
         T* newBlock = static_cast<T*>(::operator new(newCapacity * sizeof(T)));
