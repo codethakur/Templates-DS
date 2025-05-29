@@ -72,7 +72,7 @@ private:
     }
 
 private:
-    T* m_Data;
+    T* m_Data = nullptr;
     size_t m_Size;
     size_t m_Capacity;
 };
