@@ -45,11 +45,11 @@ namespace AdjacencyMatrix {
     }
 
     void displayEdge(Graph* graph) {
-        int v = graph->V; // Fixed: Use 'V' correctly
+        int v = graph->V; 
 
         std::cout << "Edges in Graph:\n";
         for (int i = 0; i < v; i++) {
-            for (int j = i + 1; j < v; j++) { // Avoid duplicate edges
+            for (int j = i + 1; j < v; j++) { // Avoiding duplicate edges
                 if (graph->adjMatrix[i][j] == 1) {
                     std::cout << "Edge between: " << i << " - " << j << std::endl;
                 }
